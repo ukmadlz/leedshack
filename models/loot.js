@@ -48,7 +48,7 @@ var loot = {
    * @return string
    */
   getLootRandomName: function() {
-    return prefix.getPrefix()+this.loots[Math.floor(Math.random() * this.loots.length) + 1];
+    return prefix.getPrefix()+this.loots[Math.floor(Math.random() * this.loots.length)];
   },
 
   /**
