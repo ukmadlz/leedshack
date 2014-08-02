@@ -41,11 +41,18 @@ var loot = {
     }
   },
 
-
+  /**
+   * Gets a random name for the loot
+   * @return string
+   */
   getLootRandomName: function() {
     return this.loots[Math.floor(Math.random() * this.loots.length) + 1];
   },
 
+  /**
+   * Gets the modifier value
+   * @return modifier
+   */
   getLootRandomModifier: function() {
     return Math.floor(Math.random() * (2*this.maxmodifier)) - this.maxmodifier;
   }
