@@ -1,7 +1,6 @@
 var http    = require('http');
 var options = {
-  host: '146.185.146.129',
-  path: '/player/check/'
+    host: '146.185.146.129'
 };
 
 exports.create = function() {
@@ -33,11 +32,12 @@ exports.create = function() {
     }); 
 };
 
-exports.check = function(params, callback) {
-    console.log("CHECKING: "+params);
+exports.call = function(path, callback) {
+    console.log("CALLING: "+path);
+    
     var request = http.get({
         host : options.host,
-        path : options.path + params
+        path : '/player/' + path
     }, function(res) {
         //console.log('MAP STATUS: ' + res.statusCode);
         // Buffer the body entirely for processing as a whole.

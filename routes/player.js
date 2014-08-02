@@ -1,5 +1,9 @@
-function getPlayerParams(player) {
-    return GLOBAL.map.map_id+'/'+player.x+','+player.y+','+player.z+'/'+player.name;
+function getPlayerPath(player, action) {
+    return action+'/'+
+           GLOBAL.map.map_id+'/'+
+           player.x+','+player.y+','+player.z+'/'+
+           player.name+'/'
+           player.level;
 }
 
 module.exports = function(db) {
@@ -53,24 +57,27 @@ module.exports = function(db) {
                 console.log(player);
                 console.log('Action '+req.query.action);
                 
+                var action = 'check';
                 switch(req.query.action) {
                     case 'north': player.y--; break;
                     case 'south': player.y++; break;
                     case 'east':  player.x++; break;
                     case 'west':  player.x--; break
-                    case 'fight':
-                        // TODO
-                        break;
-                    case 'open':
-                        // TODO
-                        break;
-                    case 'help':
-                        // TODO
-                        break;
-                    default: break;
+                    case 'fight': action = 'fight'; break;
+                    case 'open':  action = 'open';  break;
+                    case 'help':  return; break;
+                    default: return; break;
                 }
                 
-                map.check(getPlayerParams(player), function(obj) {
+                map.call(getPlayerPath(player, action), function(obj) {
+                    // check for dead player, reset to starting room of current map
+                    if(obj.status == 'dead') {
+                        obj.status = true;
+                        player.x = GLOBAL.map.starting.x;
+                        player.y = GLOBAL.map.starting.y;
+                        player.z = GLOBAL.map.starting.z;
+                    }
+                    
                     if(obj.status == true) {
                         
                         if(obj.complete == true) {
