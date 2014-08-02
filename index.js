@@ -1,3 +1,4 @@
 var server = require('./server');
-var db     = "hello ther eI'm a database";
+var db     = require('./db.js');
+
 server.init(db);
