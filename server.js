@@ -55,6 +55,10 @@ if (app.get('env') === 'development') {
 //     });
 // });
 
-app.listen('3000');
+// Start Listening
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+    console.log('Listening on ' + port);
+});
 
 module.exports = app;
