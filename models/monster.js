@@ -65,6 +65,7 @@ var monster = {
     "Frankenstein's monster",
     "Gamera",
     "Gill-man",
+    "Goblin",
     "Gog (Marvel Comics)",
     "Gorgon",
     "Grendel",

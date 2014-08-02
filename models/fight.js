@@ -28,13 +28,12 @@ var fight = {
     } else {
       var monsterLevel = monsterModel.getMonsterLevel(monster);
     }
-console.log(
-  {
-    'playerLevel':playerLevel,
-    'monsterLevel':monsterLevel,
-  }
-)
+
     // Rules to win
+    // if you 5x more powerful it's an insta-win
+    if((playerLevel/5)>monsterLevel) {
+      return true;
+    }
 
     return (playerLevel>monsterLevel)?true:false;
   }
