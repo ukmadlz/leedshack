@@ -22,7 +22,7 @@ var loot = {
       return this.getLootRandom();
     }
 
-    // @TODO retrieve Loot from database
+    // @TODO retrieve Loot from database probably won't need to implement
 
     return {
       'name': 'Random Loot',
@@ -40,6 +40,7 @@ var loot = {
       'modifier': this.getLootRandomModifier()
     }
   },
+
 
   getLootRandomName: function() {
     return this.loots[Math.floor(Math.random() * this.loots.length) + 1];
