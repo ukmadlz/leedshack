@@ -1,3 +1,7 @@
+function getPlayerParams(player) {
+    return GLOBAL.map.map_id+'/'+player.x+','+player.y+','+player.z+'/'+player.name;
+}
+
 module.exports = function(db) {
     var map     = require('../map');
     var express = require('express');
@@ -66,10 +70,16 @@ module.exports = function(db) {
                     default: break;
                 }
                 
-                //*
-                var params = GLOBAL.map.map_id+'/'+player.x+','+player.y+','+player.z;
-                map.check(params, function(obj) {
+                map.check(getPlayerParams(player), function(obj) {
                     if(obj.status == true) {
+                        
+                        if(obj.complete == true) {
+                            console.log('==============');
+                            console.log('LEVEL COMPLETE');
+                            console.log('==============');
+                            map.create();
+                        }
+                        
                         // save updated player object
                         db.player.findOneAndUpdate(
                             {'_id' : player._id.toString()}, 
@@ -94,7 +104,6 @@ module.exports = function(db) {
                     
                     res.json(obj);
                 });
-                //*/
             });
             
             

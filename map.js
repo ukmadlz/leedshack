@@ -34,6 +34,7 @@ exports.create = function() {
 };
 
 exports.check = function(params, callback) {
+    console.log("CHECKING: "+params);
     var request = http.get({
         host : options.host,
         path : options.path + params
