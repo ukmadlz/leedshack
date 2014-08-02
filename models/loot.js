@@ -1,6 +1,8 @@
 
 'use strict';
 
+var prefix = require('./prefix.js');
+
 var loot = {
 
   loots: [
@@ -46,7 +48,7 @@ var loot = {
    * @return string
    */
   getLootRandomName: function() {
-    return this.loots[Math.floor(Math.random() * this.loots.length) + 1];
+    return prefix.getPrefix()+this.loots[Math.floor(Math.random() * this.loots.length) + 1];
   },
 
   /**

@@ -1,7 +1,8 @@
 
 'use strict';
 
-var loot = require('./loot.js');
+var loot = require('./loot.js')
+  ,prefix = require('./prefix.js');
 
 var monster = {
 
@@ -12,6 +13,7 @@ var monster = {
   monsters: [
     "@cbetta",
     "@jna_sh",
+    "Pikachu",
     "Frankenstein",
     "Giant",
     "English Giant",
@@ -160,7 +162,7 @@ var monster = {
    * @return string
    */
   getMonsterRandomName: function() {
-    return this.monsters[Math.floor(Math.random() * this.monsters.length) + 1];
+    return prefix.getPrefix()+this.monsters[Math.floor(Math.random() * this.monsters.length) + 1];
   },
 
   /**
@@ -197,7 +199,7 @@ var monster = {
     for(var i = 0; i<monster.modifiers.length;i++) {
       level += monster.modifiers[i].modifier;
     }
-    
+
     return level;
   }
 }
