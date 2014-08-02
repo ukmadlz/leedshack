@@ -12,7 +12,31 @@ var fight = {
    * @return bool
    */
   getResult: function(player,monster) {
-    return (monsterModel.getMonsterLevel(player)>monsterModel.getMonsterLevel(monster))?true:false;
+    if(typeof player == 'undefined'
+      || typeof monster == 'undefined' ) {
+        return false;
+    }
+    player = JSON.parse(player);
+    monster = JSON.parse(monster);
+    if(typeof player.overalLevel != 'undefined') {
+      var playerLevel = player.overalLevel;
+    } else {
+      var playerLevel = monsterModel.getMonsterLevel(player);
+    }
+    if(typeof monster.overalLevel != 'undefined') {
+      var monsterLevel = monster.overalLevel;
+    } else {
+      var monsterLevel = monsterModel.getMonsterLevel(monster);
+    }
+console.log(
+  {
+    'playerLevel':playerLevel,
+    'monsterLevel':monsterLevel,
+  }
+)
+    // Rules to win
+
+    return (playerLevel>monsterLevel)?true:false;
   }
 
 }
