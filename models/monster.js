@@ -127,17 +127,20 @@ var monster = {
    * @param {[type]} id [description]
    */
   getMonster: function(id) {
-    if(typeof id == 'undefined') {
-      return this.getMonsterRandom();
-    }
 
-    // @TODO modifiers are listed purely to change base monster state against others
-
-    return {
+    var monster = {
       'name':'Random Monster',
       'level': 1,
       'modifiers':[{}]
     };
+
+    if(typeof id == 'undefined') {
+      monster = this.getMonsterRandom();
+    }
+
+    monster.overalLevel = this.getMonsterLevel(monster);
+
+    return monster;
   },
 
   /**
@@ -174,10 +177,28 @@ var monster = {
    */
   getMonsterRandomModifiers: function() {
     var modifiers = new Array();
-    for(var i = 0;i<(Math.floor(Math.random() * this.maxmodifiers) + 1);i++){
+    for(var i = 0;i<(Math.floor(Math.random() * this.maxmodifiers));i++){
       modifiers.push(loot.getLoot());
     }
     return modifiers;
+  },
+
+  /**
+   * Gets the monsters overall level
+   * @param object monster The Monster
+   * @return integer
+   */
+  getMonsterLevel: function(monster) {
+    if(typeof monster=='undefined') {
+      return false;
+    }
+    var level = monster.level;
+
+    for(var i = 0; i<monster.modifiers.length;i++) {
+      level += monster.modifiers[i].modifier;
+    }
+    
+    return level;
   }
 }
 
