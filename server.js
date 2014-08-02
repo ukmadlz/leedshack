@@ -2,7 +2,8 @@ var express = require('express')
   ,path = require('path')
   ,logger = require('morgan')
   ,cookieParser = require('cookie-parser')
-  ,bodyParser = require('body-parser');
+  ,bodyParser = require('body-parser')
+  url = require('url');
 
 var monsters = require('./routes/monsters')
   ,loot = require('./routes/loot')
