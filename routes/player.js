@@ -1,23 +1,3 @@
-function createPlayer(req, res) {
-    var player = new db.player({
-        name    : 'test1',
-        level   : 1,
-        game_id : params.game_id,
-        x : 1,
-        y : 1,
-        z : 1,
-    });
-    
-    player.save(function (err) {
-        if (!err) {
-          return console.log("created player");
-        }
-        else {
-          return console.log('error creating player');
-        }
-    });
-}
-
 module.exports = function(db) {
     var map     = require('../map');
     var express = require('express');
@@ -37,6 +17,8 @@ module.exports = function(db) {
     router.route('/:id')
         // retrieve player state
         .get(function(req, res) {
+            var player;
+            console.log("==============");
             
             if(typeof(req.params.id) == 'undefined' || 
                typeof(req.query.action) == 'undefined'
@@ -44,36 +26,34 @@ module.exports = function(db) {
                 
             }
             else {
-            console.log('Player '+req.params.id+" : GET");
-            
-            db.player.findOne({'name' : req.params.id}, '_id game_id x y z', function(err, player) {
+            db.player.findOne({'name' : req.params.id}, '_id name identifier level game_id x y z', function(err, player) {
                 if(err || typeof(player) == 'undefined' || player == null) {
                     console.log('Player dont exist');
                     player = new db.player({
                         name       : req.params.id.toString(),
                         identifier : req.params.id,
                         level      : 1,
-                        game_id    : 1,
-                        x : 1,
-                        y : 1,
-                        z : 1,
+                        game_id    : GLOBAL.map.map_id,
+                        x          : GLOBAL.map.starting.x,
+                        y          : GLOBAL.map.starting.y,
+                        z          : GLOBAL.map.starting.z,
                     });
                 }
+                
+                if(player.game_id != GLOBAL.map.map_id) {
+                    player.x = GLOBAL.map.starting.x;
+                    player.y = GLOBAL.map.starting.y;
+                    player.z = GLOBAL.map.starting.z;
+                }
+                
                 console.log(player);
                 console.log('Action '+req.query.action);
+                
                 switch(req.query.action) {
-                    case 'north':
-                        player.y++;
-                        break;
-                    case 'south':
-                        player.y--;
-                        break;
-                    case 'east':
-                        player.x++;
-                        break;
-                    case 'west':
-                        player.x--;
-                        break
+                    case 'north': player.y--; break;
+                    case 'south': player.y++; break;
+                    case 'east':  player.x++; break;
+                    case 'west':  player.x--; break
                     case 'fight':
                         // TODO
                         break;
@@ -83,42 +63,35 @@ module.exports = function(db) {
                     case 'help':
                         // TODO
                         break;
-                    default:
-                        
-                        break;
+                    default: break;
                 }
                 
-                db.player.findOneAndUpdate(
-                    {'_id' : player._id.toString()}, 
-                    {
-                        name       : player.name,
-                        identifier : player.identifier,
-                        level      : player.level,
-                        game_id    : player.game_id,
-                        x          : player.x,
-                        y          : player.y,
-                        z          : player.z
-                        
-                    },
-                    {
-                        upsert : true
-                    },
-                    function() {
-                        console.log('UPDATED');
-                    }
-                );
-                
-                /*
-                var params = player.game_id+'/'+player.x+','+player.y+','+player.z;
-                
+                //*
+                var params = GLOBAL.map.map_id+'/'+player.x+','+player.y+','+player.z;
                 map.check(params, function(obj) {
-                    console.log("CHeck callback");
-                    console.log(obj);
-                    
                     if(obj.status == true) {
                         // save updated player object
-                        
+                        db.player.findOneAndUpdate(
+                            {'_id' : player._id.toString()}, 
+                            {
+                                name       : player.name,
+                                identifier : player.identifier,
+                                level      : player.level,
+                                game_id    : GLOBAL.map.map_id,
+                                x          : player.x,
+                                y          : player.y,
+                                z          : player.z
+                            },
+                            {
+                                upsert : true
+                            },
+                            function() {
+                                console.log('UPDATED');
+                                console.log(player);
+                            }
+                        );
                     }
+                    
                     res.json(obj);
                 });
                 //*/
@@ -126,7 +99,6 @@ module.exports = function(db) {
             
             
             }
-            res.json({hello: '123'});
         })
         // perform an action
         .post(function(req, res) {
