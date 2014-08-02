@@ -142,6 +142,10 @@ var monster = {
 
     monster.overalLevel = this.getMonsterLevel(monster);
 
+    if(monster.overalLevel<1) {
+      monster.overalLevel = 1;
+    }
+
     return monster;
   },
 
