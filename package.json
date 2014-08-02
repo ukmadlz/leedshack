@@ -1,0 +1,9 @@
+{
+  "name": "Leedshack",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "express": "^4.7.2"
+  }
+}
