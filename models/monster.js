@@ -7,7 +7,7 @@ var loot = require('./loot.js')
 var monster = {
 
   // Maximum number of modifiers to attach to monster
-  maxmodifiers: 3,
+  maxmodifiers: 2,
 
   // Monsters from wikipedia...plus extras
   monsters: [
@@ -203,7 +203,7 @@ var monster = {
    */
   getMonsterRandomModifiers: function() {
     var modifiers = new Array();
-    loot.maxmodifier = 5;
+    loot.maxmodifier = 3;
     for(var i = 0;i<(Math.floor(Math.random() * this.maxmodifiers));i++){
       modifiers.push(loot.getLoot());
     }
