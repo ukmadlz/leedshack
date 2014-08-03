@@ -154,10 +154,10 @@ var monster = {
    * Creates a random monster
    * @return Objest
    */
-  getMonsterRandom: function() {
+  getMonsterRandom: function(base) {
     return {
       'name': this.getMonsterRandomName(),
-      'level': this.getMonsterRandomLevel(),
+      'level': this.getMonsterRandomLevel(base),
       'modifiers': this.getMonsterRandomModifiers()
     };
   },
@@ -176,7 +176,19 @@ var monster = {
    * @return integer
    */
   getMonsterRandomLevel: function(base) {
-    return Math.floor(Math.random() * 10) + 1;
+    var maxLevel = 10;
+    var minLevel = 1;
+    if(typeof base != 'undefined') {
+      base = parseInt(base);
+      maxLevel = base+2;
+      minLevel = (base<3)?1:(base-2);
+    }
+    console.log({
+      'base':base,
+      'max':maxLevel,
+      'min':minLevel}
+    );
+    return Math.floor(Math.random() * maxLevel) + minLevel;
   },
   /**
    * Creates a random monsters modifiers
