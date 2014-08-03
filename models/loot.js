@@ -77,7 +77,7 @@ var loot = {
    * @return modifier
    */
   getLootRandomModifier: function() {
-    var modifier = Math.floor(Math.random() * (2*this.maxmodifier)) - this.maxmodifier;
+    var modifier = Math.floor(Math.random() * (2.7*this.maxmodifier)) - this.maxmodifier;
     if(modifier==0) {
       modifier = this.getLootRandomModifier();
     }
