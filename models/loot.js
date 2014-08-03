@@ -5,9 +5,13 @@ var prefix = require('./prefix.js');
 
 var loot = {
 
-  loots: [
+  positiveLoot: [
     "Sword",
     "Shield",
+    "Spear"
+  ],
+
+  negativeLoot: [
     "Curse",
     "Trap",
     "Poison"
@@ -37,9 +41,10 @@ var loot = {
    * @return Object
    */
   getLootRandom: function() {
+    var modifier = this.getLootRandomModifier();
     return {
-      'name': this.getLootRandomName(),
-      'modifier': this.getLootRandomModifier()
+      'name': this.getLootRandomName(modifier),
+      'modifier': modifier
     }
   },
 
@@ -47,8 +52,24 @@ var loot = {
    * Gets a random name for the loot
    * @return string
    */
-  getLootRandomName: function() {
-    return prefix.getPrefix()+this.loots[Math.floor(Math.random() * this.loots.length)]+prefix.getSuffix();
+  getLootRandomName: function(modifier) {
+    if(typeof modifier == 'undefined') {
+      var name = this.getLootRandomNamePositive();
+    }
+    if(modifier>0) {
+      var name = this.getLootRandomNamePositive();
+    } else {
+      var name = this.getLootRandomNameNegative();
+    }
+    return prefix.getPrefix()+name+prefix.getSuffix();
+  },
+
+  getLootRandomNamePositive: function() {
+    return this.positiveLoot[Math.floor(Math.random() * this.positiveLoot.length)]
+  },
+
+  getLootRandomNameNegative: function() {
+    return this.negativeLoot[Math.floor(Math.random() * this.negativeLoot.length)]
   },
 
   /**
