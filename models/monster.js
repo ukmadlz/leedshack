@@ -203,6 +203,7 @@ var monster = {
    */
   getMonsterRandomModifiers: function() {
     var modifiers = new Array();
+    loot.maxmodifier = 5;
     for(var i = 0;i<(Math.floor(Math.random() * this.maxmodifiers));i++){
       modifiers.push(loot.getLoot());
     }
