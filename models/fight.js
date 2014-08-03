@@ -37,13 +37,13 @@ var fight = {
     }
 
     // Monster randomly powers up
-    if(Math.floor(Math.random() * 100) > 90) {
-      var monsterPowerUp = 0;
-      while(monsterPowerUp<1){
-        monsterPowerUp = lootModel.getLootRandomModifier();
-      }
-      monsterLevel = monsterLevel+monsterPowerUp;
-    }
+    // if(Math.floor(Math.random() * 100) > 90) {
+    //   var monsterPowerUp = 0;
+    //   while(monsterPowerUp<1){
+    //     monsterPowerUp = lootModel.getLootRandomModifier();
+    //   }
+    //   monsterLevel = monsterLevel+monsterPowerUp;
+    // }
 
     return (playerLevel>monsterLevel)?true:false;
   }
