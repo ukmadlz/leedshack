@@ -20,7 +20,13 @@ var prefix = {
     'Thunder',
     'Lightening',
     'Super',
-    'Awesome'
+    'Awesome',
+    'Ultra',
+    'Junior',
+    'Deadly',
+    'Fluffy',
+    'Shiny',
+    'Godlike'
   ],
 
   suffixes: [
@@ -33,7 +39,11 @@ var prefix = {
     'Rage',
     'Boomstick',
     'Neee',
-    'Schwing'
+    'Schwing',
+    'Ratchet',
+    'Schwag',
+    'Schwartz',
+    'TKO'
   ],
 
   getPrefix: function() {
