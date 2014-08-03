@@ -183,13 +183,13 @@ var monster = {
    * @return integer
    */
   getMonsterRandomLevel: function(base) {
-    var maxLevel = 10;
+    var maxLevel = 5;
     var minLevel = 1;
-    if(typeof base != 'undefined') {
-      base = parseInt(base);
-      maxLevel = base+2;
-      minLevel = (base<3)?1:(base-2);
-    }
+    // if(typeof base != 'undefined') {
+    //   base = parseInt(base);
+    //   maxLevel = base+2;
+    //   minLevel = (base<3)?1:(base-2);
+    // }
     console.log({
       'base':base,
       'max':maxLevel,
