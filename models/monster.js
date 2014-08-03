@@ -230,7 +230,7 @@ var monster = {
   getMonsterBoss: function() {
     var monster =  {
       'name':'@cbetta',
-      'level':20,
+      'level':8,
       'modifiers': this.getMonsterRandomModifiers()
     }
 
