@@ -1,7 +1,8 @@
 
 'use strict';
 
-var monsterModel = require('./monster.js');
+var monsterModel = require('./monster.js')
+  ,lootModel = require('./loot.js');
 
 var fight = {
 
@@ -33,6 +34,15 @@ var fight = {
     // if you 5x more powerful it's an insta-win
     if((playerLevel/5)>monsterLevel) {
       return true;
+    }
+
+    // Monster randomly powers up
+    if(Math.floor(Math.random() * 100) > 50) {
+      var monsterPowerUp = 0;
+      while(monsterPowerUp<1){
+        monsterPowerUp = lootModel.getLootRandomModifier();
+      }
+      monsterLevel = monsterLevel+monsterPowerUp;
     }
 
     return (playerLevel>monsterLevel)?true:false;
