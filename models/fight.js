@@ -37,7 +37,7 @@ var fight = {
     }
 
     // Monster randomly powers up
-    if(Math.floor(Math.random() * 100) > 50) {
+    if(Math.floor(Math.random() * 100) > 90) {
       var monsterPowerUp = 0;
       while(monsterPowerUp<1){
         monsterPowerUp = lootModel.getLootRandomModifier();
