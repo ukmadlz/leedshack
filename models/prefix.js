@@ -33,8 +33,7 @@ var prefix = {
     'Rage',
     'Boomstick',
     'Neee',
-    'Schwing',
-    'Your Mum'
+    'Schwing'
   ],
 
   getPrefix: function() {

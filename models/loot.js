@@ -81,6 +81,10 @@ var loot = {
     if(modifier==0) {
       modifier = this.getLootRandomModifier();
     }
+    if(modifier<0
+      && Math.abs(modifier)>(this.maxmodifier/3)) {
+        modifier = this.getLootRandomModifier();
+    }
     return modifier;
   }
 
