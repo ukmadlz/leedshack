@@ -155,11 +155,18 @@ var monster = {
    * @return Objest
    */
   getMonsterRandom: function(base) {
-    return {
+    var monster = {
       'name': this.getMonsterRandomName(),
       'level': this.getMonsterRandomLevel(base),
       'modifiers': this.getMonsterRandomModifiers()
     };
+
+    monster.overalLevel = this.getMonsterLevel(monster);
+
+    if(monster.overalLevel<1) {
+      monster.overalLevel = 1;
+    }
+    return monster;
   },
 
   /**
@@ -218,6 +225,22 @@ var monster = {
     }
 
     return level;
+  },
+
+  getMonsterBoss: function() {
+    var monster =  {
+      'name':'@cbetta',
+      'level':20,
+      'modifiers': this.getMonsterRandomModifiers()
+    }
+
+    monster.overalLevel = this.getMonsterLevel(monster);
+
+    if(monster.overalLevel<1) {
+      monster.overalLevel = 1;
+    }
+
+    return monster;
   }
 }
 
