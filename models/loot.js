@@ -85,6 +85,9 @@ var loot = {
       && Math.abs(modifier)>(this.maxmodifier/3)) {
         modifier = this.getLootRandomModifier();
     }
+    if((Math.floor(Math.random() * 100)+1) > 30 ) {
+      modifier = Math.abs(modifier);
+    }
     return modifier;
   }
 
